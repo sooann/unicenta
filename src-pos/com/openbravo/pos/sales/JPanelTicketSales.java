@@ -29,6 +29,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class JPanelTicketSales extends JPanelTicket {
 
@@ -42,6 +44,7 @@ public class JPanelTicketSales extends JPanelTicket {
     public void init(AppView app) {
         super.init(app);
         m_ticketlines.addListSelectionListener(new CatalogSelectionListener());
+        m_ticketlines.addMouseListener(new CatalogMouseClickListener());
     }
     
     @Override
@@ -84,6 +87,46 @@ public class JPanelTicketSales extends JPanelTicket {
         public void actionPerformed(ActionEvent e) {
             buttonTransition((ProductInfoExt) e.getSource());
         }  
+    }
+    
+    private class CatalogMouseClickListener implements MouseListener {
+        
+        public void mousePressed(MouseEvent e) {
+            
+        }
+
+        public void mouseReleased(MouseEvent e) {
+            
+        }
+
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        public void mouseExited(MouseEvent e) {
+            
+        }
+
+        public void mouseClicked(MouseEvent e) {
+            
+            int i = m_ticketlines.getSelectedIndex();
+
+            if (i >= 0) {
+                // Look for the first non auxiliar product.
+                while (i >= 0 && m_oTicket.getLine(i).isProductCom()) {
+                    i--;
+                }
+
+                // Show the accurate catalog panel...
+                //if (i >= 0) {
+                if (m_oTicket.getLine(i).getProductID()!="") {
+                    m_cat.showCatalogPanel(m_oTicket.getLine(i).getProductID());
+                } else {
+                    m_cat.showCatalogPanel(null);
+                }
+            }
+        }
+        
     }
     
     private class CatalogSelectionListener implements ListSelectionListener {

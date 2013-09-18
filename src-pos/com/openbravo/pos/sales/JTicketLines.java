@@ -47,6 +47,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+import java.awt.event.MouseListener;
 
 public class JTicketLines extends javax.swing.JPanel {
 
@@ -108,6 +109,12 @@ public class JTicketLines extends javax.swing.JPanel {
     }
     public void removeListSelectionListener(ListSelectionListener l) {
         m_jTicketTable.getSelectionModel().removeListSelectionListener(l);
+    }
+    public void addMouseListener(MouseListener m) {
+        m_jTicketTable.addMouseListener(m);
+    }
+    public void removeMouseListener(MouseListener m) {
+        m_jTicketTable.removeMouseListener(m);
     }
     
     public void clearTicketLines() {                   
