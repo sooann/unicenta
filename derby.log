@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Fri Sep 20 15:25:35 SGT 2013:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-0141-3a42-72b6-00000d9138b8 
-on database directory C:\Users\user\rtipos-database  with class loader sun.misc.Launcher$AppClassLoader@f4b2263 
+Sun Sep 22 07:43:35 SGT 2013:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-0141-42e8-31af-00000d90eed0 
+on database directory C:\Users\user\unicentaopos-database  with class loader sun.misc.Launcher$AppClassLoader@321df5c7 
 Loaded from file:/C:/Users/user/Documents/code/unicenta/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_40-b43

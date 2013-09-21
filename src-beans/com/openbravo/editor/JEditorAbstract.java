@@ -84,6 +84,10 @@ public abstract class JEditorAbstract extends javax.swing.JPanel implements Edit
         m_jText.setBorder(m_bActive ? m_borderactive : m_borderinactive);
         reprintText();
     }
+    
+    public boolean getActive() {
+        return m_bActive;
+    }
             
     protected void reprintText() {
         
@@ -166,7 +170,7 @@ public abstract class JEditorAbstract extends javax.swing.JPanel implements Edit
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel m_jMode;
-    private javax.swing.JButton m_jText;
+    protected javax.swing.JButton m_jText;
     private javax.swing.JPanel panBackground;
     // End of variables declaration//GEN-END:variables
  

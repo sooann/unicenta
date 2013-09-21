@@ -19,11 +19,18 @@
 
 package com.openbravo.editor;
 
+import com.openbravo.data.gui.MessageInf;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import org.comtel.javafx.fxKeyboard;
+import java.awt.Point;
+
 public class JEditorString extends JEditorText {
     
     /** Creates a new instance of JEditorString */
     public JEditorString() {
         super();
+        m_jText.addMouseListener(new JEditorMouseListener());
     }
     
     @Override
@@ -34,6 +41,36 @@ public class JEditorString extends JEditorText {
     @Override
     protected int getStartMode() {
         return MODE_Abc1;
+    }
+    
+    private class JEditorMouseListener implements MouseListener {
+        
+        public void mousePressed(MouseEvent e) {
+            
+        }
+
+        public void mouseReleased(MouseEvent e) {
+            
+        }
+
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        public void mouseExited(MouseEvent e) {
+            
+        }
+
+        public void mouseClicked(MouseEvent e) {
+            JEditorString parent = (JEditorString) e.getComponent().getParent().getParent();
+            if (parent.isEnabled()) {
+                Point location = parent.getLocationOnScreen();
+                location.y+=10;
+                location.x-=5;
+                fxKeyboard.showKeyboard(location);
+            } 
+        }
+        
     }
     
 }
