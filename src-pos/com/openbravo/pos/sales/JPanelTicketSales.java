@@ -108,21 +108,28 @@ public class JPanelTicketSales extends JPanelTicket {
         }
 
         public void mouseClicked(MouseEvent e) {
-            
-            int i = m_ticketlines.getSelectedIndex();
+            if (e.getClickCount()==1) {
+                int i = m_ticketlines.getSelectedIndex();
 
-            if (i >= 0) {
-                // Look for the first non auxiliar product.
-                while (i >= 0 && m_oTicket.getLine(i).isProductCom()) {
-                    i--;
+                if (i >= 0) {
+                    // Look for the first non auxiliar product.
+                    while (i >= 0 && m_oTicket.getLine(i).isProductCom()) {
+                        i--;
+                    }
+
+                    // Show the accurate catalog panel...
+                    //if (i >= 0) {
+                    if (m_oTicket.getLine(i).getProductID()!="") {
+                        m_cat.showCatalogPanel(m_oTicket.getLine(i).getProductID());
+                    } else {
+                        m_cat.showCatalogPanel(null);
+                    }
                 }
-
-                // Show the accurate catalog panel...
-                //if (i >= 0) {
-                if (m_oTicket.getLine(i).getProductID()!="") {
-                    m_cat.showCatalogPanel(m_oTicket.getLine(i).getProductID());
-                } else {
-                    m_cat.showCatalogPanel(null);
+            } else {
+                if (e.getClickCount()==2) {
+                    JTicketLines parent = (JTicketLines) e.getComponent().getParent().getParent().getParent();
+                    JPanelTicket PTicket = (JPanelTicket) parent.getParent().getParent().getParent().getParent();
+                    PTicket.editSelectedTicket();
                 }
             }
         }
