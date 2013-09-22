@@ -1080,6 +1080,23 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
             m_ticketlines.setSelectedIndex(m_oTicket.getLinesCount() - 1);
         }    
     }
+    
+    public void editSelectedTicket() { 
+        int i = m_ticketlines.getSelectedIndex();
+        if (i < 0){
+            Toolkit.getDefaultToolkit().beep(); // no line selected
+        } else {
+            try {
+                TicketLineInfo newline = JProductLineEdit.showMessage(this, m_App, m_oTicket.getLine(i));
+                if (newline != null) {
+                    // line has been modified
+                    paintTicketLine(i, newline);
+                }
+            } catch (BasicException e) {
+                new MessageInf(e).show(this);
+            }
+        }
+    }
      
     public static class ScriptArg {
         private String key;
@@ -1599,20 +1616,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 
     private void m_jEditLineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jEditLineActionPerformed
         
-        int i = m_ticketlines.getSelectedIndex();
-        if (i < 0){
-            Toolkit.getDefaultToolkit().beep(); // no line selected
-        } else {
-            try {
-                TicketLineInfo newline = JProductLineEdit.showMessage(this, m_App, m_oTicket.getLine(i));
-                if (newline != null) {
-                    // line has been modified
-                    paintTicketLine(i, newline);
-                }
-            } catch (BasicException e) {
-                new MessageInf(e).show(this);
-            }
-        }
+        editSelectedTicket();
 
     }//GEN-LAST:event_m_jEditLineActionPerformed
 
