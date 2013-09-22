@@ -37,9 +37,9 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import org.comtel.javafx.fxKeyboard;
 import org.jdesktop.swingx.JXTaskPane;
 import org.jdesktop.swingx.JXTaskPaneContainer;
-
 /**
  *
  * @author adrianromero
@@ -427,6 +427,7 @@ public class JPrincipalApp extends javax.swing.JPanel implements AppUserView {
         m_jPanelRight = new javax.swing.JPanel();
         m_jPanelTitle = new javax.swing.JPanel();
         m_jTitle = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         m_jPanelContainer = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
@@ -462,7 +463,15 @@ public class JPrincipalApp extends javax.swing.JPanel implements AppUserView {
 
         m_jTitle.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         m_jTitle.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, java.awt.Color.darkGray), javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-        m_jPanelTitle.add(m_jTitle, java.awt.BorderLayout.NORTH);
+        m_jPanelTitle.add(m_jTitle, java.awt.BorderLayout.CENTER);
+
+        jButton2.setText("Show Keyboard");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        m_jPanelTitle.add(jButton2, java.awt.BorderLayout.LINE_END);
 
         m_jPanelRight.add(m_jPanelTitle, java.awt.BorderLayout.NORTH);
 
@@ -477,10 +486,15 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     setMenuVisible(!m_jPanelLeft.isVisible());
     
 }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        fxKeyboard.showKeyboard(null);
+    }//GEN-LAST:event_jButton2ActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel m_jPanelContainer;
