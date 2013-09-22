@@ -39,7 +39,7 @@
 	<!-- <button key="button.setperson" image="img.user" code="script.SetPerson"/> -->
 
 	<!-- SET Kitchen Print (Default=DISABLED) -->
-	<!-- <button key="button.sendorder" image="img.kit_print" code="script.SendOrder"/> -->
+	<button key="button.sendorder" image="img.kit_print" code="script.SendOrder"/>
 
 	<!-- SET Ticket Print Preview (Default=ENABLED) -->
     	<button key="button.print" image="img.ticket_print" template="Printer.TicketPreview"/>

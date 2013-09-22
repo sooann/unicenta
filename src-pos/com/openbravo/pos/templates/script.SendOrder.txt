@@ -21,7 +21,7 @@
 //    along with uniCenta oPOS.  If not, see <http://www.gnu.org/licenses/>.
 // **************************************************************************
 
-boolean kitchen = false;
+boolean kitchen = true;
 
 for(int i= 0; i < ticket.getLinesCount(); i++){
 	line = ticket.getLine(i);
