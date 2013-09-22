@@ -117,6 +117,7 @@ public class JRootApp extends JPanel implements AppView {
         // Inicializo los componentes visuales
         initComponents ();            
         jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(30, 30));
+        m_jPanelDown.setVisible(false);
     }
     
     public boolean initApp(AppProperties props) {
