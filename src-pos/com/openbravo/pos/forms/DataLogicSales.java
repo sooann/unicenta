@@ -803,6 +803,17 @@ public class DataLogicSales extends BeanFactoryDataSingle {
             , new int[] {0}
         );
     }
+    
+    public final TableDefinition getTableDiscounts() {
+        return new TableDefinition(s,
+            "DISCOUNTS"
+            , new String[] {"ID", "NAME", "RATE", "DATESTART", "DATEEND", }
+            , new String[] {"ID", AppLocal.getIntString("Label.Name"), AppLocal.getIntString("Label.DiscountRate"), AppLocal.getIntString("Label.StartDate"), AppLocal.getIntString("Label.EndDate")}
+            , new Datas[] {Datas.STRING, Datas.STRING, Datas.DOUBLE, Datas.TIMESTAMP, Datas.TIMESTAMP}
+            , new Formats[] {Formats.STRING, Formats.STRING, Formats.DOUBLE, Formats.TIMESTAMP, Formats.TIMESTAMP}
+            , new int[] {0}
+        );
+    }
 
     public final TableDefinition getTableTaxCustCategories() {
         return new TableDefinition(s,
