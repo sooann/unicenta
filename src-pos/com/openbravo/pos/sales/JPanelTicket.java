@@ -62,7 +62,8 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRMapArrayDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
- 
+import com.openbravo.pos.inventory.DiscountInfo;
+import com.openbravo.format.Formats;
 
 /**
  *
@@ -354,6 +355,33 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
     
     protected void addTicketLine(TicketLineInfo oLine) {   
         
+        //check if ticket has discount
+        Double totaldiscount = 0.0;
+        try {
+            List<DiscountInfo> oDiscounts = dlSales.getCurrentDiscounts(oLine.getProductID());
+            if (oDiscounts.size()!=0) {                  
+                for (DiscountInfo disc : oDiscounts) {
+                    totaldiscount += disc.getRate();
+                }
+            }
+        } catch (BasicException eData) {
+            stateToZero();           
+            new MessageInf(eData).show(this);           
+        }
+        
+        if (totaldiscount>0) {
+            //System.out.println ("total discount for item "+oLine.getProductName()+" : "+totaldiscount);
+            TicketLineInfo newLine = new TicketLineInfo (
+                    oLine.getProductID(),
+                    oLine.getProductName() + " -" + Formats.PERCENT.formatValue(totaldiscount/100),
+                    oLine.getProductTaxCategoryID(),
+                    oLine.getMultiply(),
+                    oLine.getPrice () * (1-(totaldiscount/100)),
+                    oLine.getTaxInfo()
+                    ); 
+            oLine = newLine;
+        }
+            
         if (executeEventAndRefresh("ticket.addline", new ScriptArg("line", oLine)) == null) {
         
             if (oLine.isProductCom()) {

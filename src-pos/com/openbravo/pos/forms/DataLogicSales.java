@@ -31,12 +31,14 @@ import com.openbravo.pos.payment.PaymentInfo;
 import com.openbravo.pos.payment.PaymentInfoTicket;
 import com.openbravo.pos.promotion.PromoInfo;
 import com.openbravo.pos.promotion.PromoTypeInfo;
+import com.openbravo.pos.inventory.DiscountInfo;
 import com.openbravo.pos.ticket.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -165,6 +167,17 @@ public class DataLogicSales extends BeanFactoryDataSingle {
 		, SerializerWriteString.INSTANCE
 		, ProductInfoExt.getSerializerRead()).list(id);
     }
+    
+    //get current discount promotions
+    public List<DiscountInfo> getCurrentDiscounts(String id) throws BasicException {
+        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
+        return new PreparedSentence (s
+                , "SELECT DISCOUNTS.ID, DISCOUNTS.name, DISCOUNTS.rate from DISCOUNTS, DISCOUNT_PROD where DISCOUNTS.ID=DISCOUNT_PROD.DISCOUNT and DISCOUNT_PROD.PRODUCT = ? and '"+   dateformat.format(new Date()) +"' between DISCOUNTS.DATESTART and DISCOUNTS.DATEEND"
+                , SerializerWriteString.INSTANCE
+                , DiscountInfo.getSerializerRead()).list(id);
+    }
+    
 // ADDED JG 10 Nov. 12 Promo ***    
     public List<PromoInfo> getCurrentPromos() throws BasicException {
        

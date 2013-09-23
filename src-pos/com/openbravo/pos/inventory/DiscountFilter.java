@@ -46,11 +46,11 @@ public class DiscountFilter extends javax.swing.JPanel implements ReportEditorCr
     public void init(AppView app) {
 
         discusesent = new StaticSentence(app.getSession()
-            , "SELECT ID, NAME FROM DISCOUNTS ORDER BY NAME"
+            , "SELECT ID, NAME, RATE FROM DISCOUNTS ORDER BY NAME"
             , null
             , new SerializerRead() {@Override
  public Object readValues(DataRead dr) throws BasicException {
-                return new DiscountInfo(dr.getString(1), dr.getString(2));
+                return new DiscountInfo(dr.getString(1), dr.getString(2), dr.getDouble(3));
             }});
         discusemodel = new ComboBoxValModel();
     }

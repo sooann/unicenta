@@ -19,20 +19,42 @@
 
 package com.openbravo.pos.inventory;
 
+import com.openbravo.basic.BasicException;
+import com.openbravo.data.loader.DataRead;
 import com.openbravo.data.loader.IKeyed;
+import com.openbravo.data.loader.ImageUtils;
+import com.openbravo.data.loader.SerializableRead;
+import com.openbravo.data.loader.SerializerRead;
+import com.openbravo.pos.ticket.CategoryInfo;
 
 /**
  *
  * @author adrianromero
  */
-public class DiscountInfo implements IKeyed {
+public class DiscountInfo implements SerializableRead, IKeyed {
 
     private String id;
     private String name;
+    private Double rate;
 
-    public DiscountInfo(String id, String name) {
+    public DiscountInfo(String id, String name, Double rate) {
         this.id = id;
         this.name = name;
+        this.rate = rate;
+    }
+
+    @Override
+    public void readValues(DataRead dr) throws BasicException {
+        id = dr.getString(1);
+        name = dr.getString(2);
+        rate = dr.getDouble(3);
+    }
+    
+    public static SerializerRead getSerializerRead() {
+        return new SerializerRead() {@Override
+ public Object readValues(DataRead dr) throws BasicException {
+            return new DiscountInfo(dr.getString(1), dr.getString(2), dr.getDouble(3));
+        }};
     }
 
     @Override
@@ -46,6 +68,10 @@ public class DiscountInfo implements IKeyed {
 
     public String getName() {
         return name;
+    }
+
+    public Double getRate() {
+        return rate;
     }
 
     @Override
